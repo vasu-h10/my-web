@@ -5,19 +5,31 @@ header {
   padding: 10px 16px;
   background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
 }
 
-.header-left, .header-center, .header-right {
+.header-left, .header-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .header-center {
-  flex-direction: column;
   text-align: center;
+  flex: 1;
 }
 
-.header-right {
-  gap: 15px;
+.header-center h1 {
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+  color: #222;
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
 }
