@@ -1,5 +1,7 @@
+import React from "react";
 import "./Header.css";
 import ProfileIcon from "./ProfileIcon";
+import LogoTitle from "./LogoTitle";
 import ThemeToggle from "./ThemeToggle";
 import DonationIcon from "./DonationIcon";
 
@@ -11,7 +13,7 @@ export default function Header() {
       </div>
 
       <div className="header-section center">
-        <h1>My Web</h1>
+        <LogoTitle />
       </div>
 
       <div className="header-section right">

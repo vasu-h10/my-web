@@ -1,48 +1,28 @@
-.app-header {
+header.app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
-  background-color: #fff;
+  padding: 8px 10px;
+  background-color: #fafafa;
   border-bottom: 1px solid #ddd;
-  width: 100vw; /* ✅ full screen width on Android */
-  max-width: 100%;
+  width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;
-  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 .header-section {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-shrink: 0;
 }
 
 .header-section.center {
   flex: 1;
   justify-content: center;
+  overflow: hidden;
 }
 
-.header-section.left,
-.header-section.right {
-  flex-shrink: 0;
-}
-
-.header-section h1 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin: 0;
-  color: #222;
-}
-
-@media (max-width: 600px) {
-  .app-header {
-    flex-wrap: nowrap;
-    padding: 10px;
-    justify-content: space-between;
-  }
-
-  .header-section h1 {
-    font-size: 1.2rem;
-  }
+svg {
+  max-width: 100%;
+  height: auto;
 }
