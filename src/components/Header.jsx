@@ -5,14 +5,16 @@ import DonationIcon from "./DonationIcon";
 
 export default function Header() {
   return (
-    <header>
-      <div className="header-left">
+    <header className="app-header">
+      <div className="header-section left">
         <ProfileIcon />
       </div>
-      <div className="header-center">
-        <h1>My&nbsp;Web</h1>
+
+      <div className="header-section center">
+        <h1>My Web</h1>
       </div>
-      <div className="header-right">
+
+      <div className="header-section right">
         <ThemeToggle />
         <DonationIcon />
       </div>
