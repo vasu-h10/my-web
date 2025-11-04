@@ -9,8 +9,19 @@ export default function App() {
 
   return (
     <div className="app">
+      {/* Header includes LogoTitle inside it */}
       <Header onRegistered={() => setRegistered(true)} />
-      {registered ? <MainBody /> : <p className="notice">👤 Please complete profile registration</p>}
+
+      {/* Main section */}
+      <main className="main-body">
+        {registered ? (
+          <MainBody />
+        ) : (
+          <p className="notice">👤 Please complete profile registration</p>
+        )}
+      </main>
+
+      {/* Footer section */}
       <Footer />
     </div>
   );
