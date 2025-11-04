@@ -1,32 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function ProfileIcon({ onRegistered }) {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (name.trim()) {
-      localStorage.setItem("userName", name);
-      setOpen(false);
-      onRegistered();
-    }
-  };
-
+export default function ProfileIcon({ onClick }) {
   return (
-    <div className="profile-icon">
-      <button onClick={() => setOpen(!open)}>👤</button>
-      {open && (
-        <form className="profile-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <button type="submit">Register</button>
-        </form>
-      )}
-    </div>
+    <button aria-label="profile" onClick={onClick}
+      style={{
+        background:"transparent", border:"none", color:"white", padding:4, cursor:"pointer"
+      }}>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+      </svg>
+    </button>
   );
 }

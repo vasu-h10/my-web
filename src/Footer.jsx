@@ -1,9 +1,5 @@
 import React from "react";
 
-export default function Footer() {
-  return (
-    <footer className="footer">
-      <p>© 2025 My Web. All rights reserved.</p>
-    </footer>
-  );
+export default function Footer(){
+  return <footer className="footer">© {new Date().getFullYear()} My Vindhu — Local vendor demo</footer>;
 }

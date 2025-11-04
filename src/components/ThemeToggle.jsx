@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-export default function ThemeToggle() {
-  const [dark, setDark] = useState(() => localStorage.getItem("theme") === "dark");
-
-  useEffect(() => {
-    document.body.className = dark ? "dark" : "light";
-    localStorage.setItem("theme", dark ? "dark" : "light");
-  }, [dark]);
-
+export default function ThemeToggle({ dark, onToggle }) {
   return (
-    <button onClick={() => setDark(!dark)}>
-      {dark ? "🌙" : "☀️"}
+    <button aria-label="theme" onClick={onToggle}
+      style={{ background:"transparent", border:"none", color:"white", cursor:"pointer", padding:6 }}>
+      { dark ? "☀️" : "🌙" }
     </button>
   );
 }
