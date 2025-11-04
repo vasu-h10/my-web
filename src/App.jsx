@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import Header from "./components/Header";
+import MainBody from "./MainBody";
+import Footer from "./Footer";
 import "./App.css";
 
 export default function App() {
+  const [registered, setRegistered] = useState(false);
+
   return (
-    <div style={{ textAlign: "center", padding: "50px" }}>
-      <h1>🚀 My Web React + Vite + ES Modules</h1>
-      <p>This is your clean starter app — ready for logic and UI!</p>
+    <div className="app">
+      <Header onRegistered={() => setRegistered(true)} />
+      {registered ? <MainBody /> : <p className="notice">👤 Please complete profile registration</p>}
+      <Footer />
     </div>
   );
 }
