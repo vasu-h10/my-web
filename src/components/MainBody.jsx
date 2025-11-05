@@ -14,7 +14,6 @@ export default function MainBody() {
     setVendors(stored.filter(v => v.status === "registered"));
   }, []);
 
-  // Filter vendors based on search term
   const filteredVendors = vendors.filter(
     v =>
       v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -32,7 +31,6 @@ export default function MainBody() {
 
   return (
     <main className="main">
-      {/* Search box */}
       <Search value={searchTerm} onChange={setSearchTerm} />
 
       <div className="vendor-grid">
@@ -41,13 +39,14 @@ export default function MainBody() {
             {/* Vendor Header */}
             <VendorHeader vendor={v} />
 
-            {/* Dish images scroll */}
+            {/* Dish images scroll row */}
             <VendorDishes dishes={v.dishes || []} />
 
             {/* Vendor source card */}
             <VendorSourceCard vendor={v} />
           </div>
         ))}
+
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
       </div>
     </main>
