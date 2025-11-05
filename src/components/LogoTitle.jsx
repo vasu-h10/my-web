@@ -20,7 +20,7 @@ export default function LogoTitle() {
           </pattern>
         </defs>
 
-        {/* Background grid rectangle (transparent, prevents cutoff) */}
+        {/* Transparent background grid (prevents edge cutoff) */}
         <rect x="0" y="0" width="202" height="202" fill="url(#grid)" />
 
         <g id="dish">
@@ -56,6 +56,14 @@ export default function LogoTitle() {
                115 67 100 66 95 66 90 67 95 70 96 75 101 80 103 85 106 87 106 90 109 95 
                113 89 115 86 120 76 135 67 150 58 155 55 156 60 160 61 165 59 167 54 166 50 
                160 47 159 40 155 36 150 36 146 40 146 45 149 48 130 59"
+            fill="none"
+            stroke="red"
+            strokeWidth="1"
+          />
+
+          {/* Right-top connector (previously missing) */}
+          <path
+            d="M 170 95 L 166 90 165 85 162 80 160 75 155 70 150 67 145 65 143 63"
             fill="none"
             stroke="red"
             strokeWidth="1"
