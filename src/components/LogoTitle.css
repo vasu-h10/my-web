@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fafafa;
+  background: transparent;
   padding: 6px 0;
   width: 100%;
 }
