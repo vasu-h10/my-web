@@ -147,8 +147,4 @@ body.dark .dish-row img {
 body.dark .vendor-source-card {
   border: 1px solid #555;
   background-color: #222;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 11f01ef (Fully integrate VendorHeader, VendorDishes, and VendorSourceCard; update MainBody layout and CSS)
