@@ -5,7 +5,7 @@ export default function LogoTitle() {
   return (
     <div className="logo-title-container">
       <svg
-        viewBox="0 0 202 202"
+        viewBox="-5 -5 212 212"  // expanded viewBox: adds 5px padding on all sides
         xmlns="http://www.w3.org/2000/svg"
       >
         <g id="dish">
@@ -62,11 +62,11 @@ export default function LogoTitle() {
             textAnchor="middle"
             alignmentBaseline="alphabetic"
             fontFamily="Verdana, sans-serif"
-            fontSize="28"
+            fontSize="32"
             fontWeight="bold"
             fill="red"
             stroke="red"
-            strokeWidth="0.8"
+            strokeWidth="1"
           >
             MY VINDHU
           </text>
