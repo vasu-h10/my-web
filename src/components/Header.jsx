@@ -23,7 +23,7 @@ export default function Header({ onRegistered }) {
         )}
       </div>
 
-      {/* Center section — wrapped for logo alignment */}
+      {/* Center section */}
       <div className="header-section center">
         <div className="logo-wrapper">
           <LogoTitle />
@@ -35,8 +35,11 @@ export default function Header({ onRegistered }) {
         <ThemeToggle
           dark={dark}
           onToggle={() => {
-            setDark((d) => !d);
-            document.body.classList.toggle("dark", !dark);
+            setDark((d) => {
+              const next = !d;
+              document.body.classList.toggle("dark", next);
+              return next;
+            });
           }}
         />
         <DonationIcon />
