@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
-import VendorHeader from "./VendorHeader";
-import VendorDishes from "./VendorDishes";
-import VendorSourceCard from "./VendorSourceCard";
+import VendorCard from "./VendorCard";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
@@ -32,21 +30,10 @@ export default function MainBody() {
   return (
     <main className="main">
       <Search value={searchTerm} onChange={setSearchTerm} />
-
       <div className="vendor-grid">
         {filteredVendors.map(v => (
-          <div key={v.id} className="vendor-card">
-            {/* Vendor Header */}
-            <VendorHeader vendor={v} />
-
-            {/* Dish images scroll row */}
-            <VendorDishes dishes={v.dishes || []} />
-
-            {/* Vendor source card */}
-            <VendorSourceCard vendor={v} />
-          </div>
+          <VendorCard key={v.id} vendor={v} />
         ))}
-
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
       </div>
     </main>
