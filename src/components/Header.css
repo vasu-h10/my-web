@@ -23,28 +23,29 @@
 }
 
 .header-section.center {
-  justify-content: flex-start; /* changed from center to flex-start for slight left shift */
-  padding-left: 8px;           /* small nudge for perfect sitting */
+  justify-content: flex-start; /* shift center section slightly left */
+  margin-left: -6px;           /* fine-tune position of logo + toggle */
 }
 
 .header-section.right {
   justify-content: flex-end;
 }
 
-/* Constrain logo block to prevent layout push */
+/* Constrain logo block */
 .logo-wrapper {
   max-width: 140px;
-  margin: 0 auto;
   flex-shrink: 1;
-  margin-left: -8px; /* shift logo slightly left */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between logo and dark/light button */
 }
 
-/* Logo title styling (fallback for older layout) */
+/* Logo title styling */
 .logo-title {
   display: flex;
   flex-direction: column;
   line-height: 1;
-  text-align: center;
+  text-align: left; /* align left since logo + toggle shifted left */
 }
 
 .logo-title .title {
@@ -96,7 +97,8 @@
 
   .logo-wrapper {
     max-width: 100px;
-    margin-left: -4px; /* slightly reduce left shift on mobile */
+    margin-left: -4px;
+    gap: 4px;
   }
 }
 
@@ -125,7 +127,7 @@ body.dark .notice {
   color: #aaa;
 }
 
-/* Optional: LogoTitle colors in dark mode */
+/* LogoTitle colors in dark mode */
 body.dark .logo-title .title,
 body.dark .logo-title .subtitle {
   color: #fff;
