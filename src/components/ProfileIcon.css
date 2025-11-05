@@ -1,0 +1,15 @@
+.profile-icon {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.profile-icon:hover {
+  transform: scale(1.15);
+}
