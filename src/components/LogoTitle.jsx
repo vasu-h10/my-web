@@ -5,9 +5,8 @@ export default function LogoTitle() {
   return (
     <div className="logo-title-container">
       <svg
-        viewBox="-10 -10 230 220"
+        viewBox="-5 -5 212 212"   // extra padding prevents cutoff on edges
         xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid meet"
       >
         <g id="dish">
           {/* Dish body */}
@@ -63,7 +62,7 @@ export default function LogoTitle() {
             textAnchor="middle"
             alignmentBaseline="alphabetic"
             fontFamily="Verdana, sans-serif"
-            fontSize="28"
+            fontSize="26"
             fontWeight="bold"
             fill="red"
             stroke="red"
