@@ -5,9 +5,24 @@ export default function LogoTitle() {
   return (
     <div className="logo-title-container">
       <svg
-        viewBox="-5 -5 212 212"   // extra padding prevents cutoff on edges
+        viewBox="0 0 202 202"
         xmlns="http://www.w3.org/2000/svg"
       >
+        <defs>
+          {/* Transparent grid pattern (keeps proportions but invisible) */}
+          <pattern id="smallGrid" width="1" height="1" patternUnits="userSpaceOnUse">
+            <path d="M1 0 L0 0 0 1" fill="none" stroke="transparent" strokeWidth="0.05" />
+          </pattern>
+
+          <pattern id="grid" width="5" height="5" patternUnits="userSpaceOnUse">
+            <rect width="5" height="5" fill="url(#smallGrid)" />
+            <path d="M5 0 L0 0 0 5" fill="none" stroke="transparent" strokeWidth="0.2" />
+          </pattern>
+        </defs>
+
+        {/* Background grid rectangle (transparent, prevents cutoff) */}
+        <rect x="0" y="0" width="202" height="202" fill="url(#grid)" />
+
         <g id="dish">
           {/* Dish body */}
           <path
@@ -46,7 +61,7 @@ export default function LogoTitle() {
             strokeWidth="1"
           />
 
-          {/* Red inner fill */}
+          {/* Inner red fill */}
           <path
             d="M115 67 L 100 66 95 66 90 67 95 70 96 75 101 80 103 85 106 87 106 90 
                109 95 113 89 115 86 120 76 115 75 115 70 110 70 115 67"
@@ -62,11 +77,11 @@ export default function LogoTitle() {
             textAnchor="middle"
             alignmentBaseline="alphabetic"
             fontFamily="Verdana, sans-serif"
-            fontSize="26"
+            fontSize="32"
             fontWeight="bold"
             fill="red"
             stroke="red"
-            strokeWidth="0.8"
+            strokeWidth="1"
           >
             MY VINDHU
           </text>
