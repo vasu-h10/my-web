@@ -1,12 +1,12 @@
 import React from "react";
+import "./LogoTitle.css";
 
 export default function LogoTitle() {
   return (
-    <div style={{ width: "100%", textAlign: "center", background: "#fafafa" }}>
+    <div className="logo-title-container">
       <svg
         viewBox="0 0 202 202"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ width: "100%", height: "auto" }}
       >
         <g id="dish">
           {/* Dish body */}
