@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
-import VendorHeader from "./VendorHeader";
 import VendorDishes from "./VendorDishes";
 import VendorSourceCard from "./VendorSourceCard";
+import VendorHeader from "./VendorHeader";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
@@ -36,15 +36,13 @@ export default function MainBody() {
       <div className="vendor-grid">
         {filteredVendors.map(v => (
           <div key={v.id} className="vendor-card">
-            {/* Vendor header */}
+            {/* Vendor Header */}
             <VendorHeader vendor={v} />
 
-            {/* Vendor dishes */}
-            {v.dishes && v.dishes.length > 0 && (
-              <VendorDishes dishes={v.dishes} />
-            )}
+            {/* Dish images scroll row */}
+            <VendorDishes dishes={v.dishes || []} />
 
-            {/* Vendor source card / form wrapper */}
+            {/* Vendor Source Card */}
             <VendorSourceCard vendor={v} />
           </div>
         ))}
