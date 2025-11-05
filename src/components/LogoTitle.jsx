@@ -62,11 +62,11 @@ export default function LogoTitle() {
             textAnchor="middle"
             alignmentBaseline="alphabetic"
             fontFamily="Verdana, sans-serif"
-            fontSize="32"
+            fontSize="28"
             fontWeight="bold"
             fill="red"
             stroke="red"
-            strokeWidth="1"
+            strokeWidth="0.8"
           >
             MY VINDHU
           </text>
