@@ -46,7 +46,7 @@
   background-color: #fafafa;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -98,6 +98,18 @@
   border: 1px solid #ccc;
 }
 
+/* Vendor source card */
+.vendor-source-card {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f5f5f5;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 /* Dark mode */
 body.dark .main {
   background-color: #121212;
@@ -130,4 +142,9 @@ body.dark .vendor-header img.profile {
 
 body.dark .dish-row img {
   border: 1px solid #555;
+}
+
+body.dark .vendor-source-card {
+  border: 1px solid #555;
+  background-color: #222;
 }
