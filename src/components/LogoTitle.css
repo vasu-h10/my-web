@@ -3,31 +3,31 @@
   justify-content: center;
   align-items: center;
   background: transparent;
-  padding: 2px 0;          /* smaller padding */
-  width: auto;             /* no full width stretch */
-  flex-shrink: 0;          /* prevent pushing sides */
+  padding: 2px 0;
+  width: auto;            /* don't stretch full width */
+  flex-shrink: 0;         /* prevent collapsing between icons */
 }
 
 .logo-title-container svg {
   width: auto;
   height: auto;
-  max-width: 90px;         /* smaller logo */
+  max-width: 100px;       /* reduced for header fit */
 }
 
 .logo-title-container text {
   font-family: Verdana, sans-serif;
   font-weight: bold;
-  font-size: 18px;         /* reduced title */
+  font-size: 22px;        /* compact title */
   fill: red;
   stroke: red;
-  stroke-width: 0.6;
+  stroke-width: 0.7;
 }
 
 @media (max-width: 480px) {
   .logo-title-container svg {
-    max-width: 70px;       /* smaller for mobile */
+    max-width: 80px;      /* smaller on mobile */
   }
   .logo-title-container text {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
