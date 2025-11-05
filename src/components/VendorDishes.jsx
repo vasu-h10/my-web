@@ -1,5 +1,5 @@
 import React from "react";
-import "./VendorCard.css";
+import "./VendorDishes.css";
 
 export default function VendorDishes({ dishes }) {
   return (

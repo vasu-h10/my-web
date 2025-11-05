@@ -1,0 +1,59 @@
+/* VendorDishes.css */
+
+/* Container for horizontal scroll */
+.vendor-dishes {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+
+/* Individual dish card */
+.dish-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  gap: 4px;
+}
+
+.dish-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  flex-shrink: 0;
+}
+
+.dish-card input {
+  width: 80px;
+  font-size: 12px;
+  text-align: center;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Focus style */
+.dish-card input:focus {
+  border-color: #0066ff;
+  box-shadow: 0 0 4px rgba(0, 102, 255, 0.4);
+}
+
+/* Dark mode */
+body.dark .dish-card img {
+  border: 1px solid #555;
+}
+
+body.dark .dish-card input {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #444;
+}
+
+body.dark .dish-card input:focus {
+  border-color: #3399ff;
+  box-shadow: 0 0 4px rgba(51, 153, 255, 0.4);
+}
