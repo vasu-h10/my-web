@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
+import Search from "./Search";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("vendors") || "[]");
     setVendors(stored.filter(v => v.status === "registered"));
   }, []);
+
+  // Filter vendors based on search term
+  const filteredVendors = vendors.filter(
+    v =>
+      v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      v.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      v.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      v.location.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (!vendors.length)
     return (
@@ -18,13 +29,19 @@ export default function MainBody() {
 
   return (
     <main className="main">
+      {/* Search box */}
+      <Search value={searchTerm} onChange={setSearchTerm} />
+
       <div className="vendor-grid">
-        {vendors.map(v => (
+        {filteredVendors.map(v => (
           <div key={v.id} className="vendor-card">
             <div className="vendor-name">{v.firstName} {v.lastName}</div>
             <div className="vendor-details">{v.email} · {v.location}</div>
           </div>
         ))}
+        {filteredVendors.length === 0 && (
+          <p>No vendors match your search.</p>
+        )}
       </div>
     </main>
   );
