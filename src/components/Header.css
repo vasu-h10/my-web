@@ -95,4 +95,37 @@
   .logo-wrapper {
     max-width: 100px;
   }
+/* --- existing styles --- */
+/* your current Header.css stays as-is above this line */
+
+/* --- Dark mode overrides --- */
+body.dark {
+  background-color: #111;
+  color: #eee;
+}
+
+body.dark .app-header {
+  background-color: #222;
+  color: #fff;
+}
+
+body.dark .main {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.dark .footer {
+  background-color: #1a1a1a;
+  color: #ccc;
+}
+
+body.dark .notice {
+  color: #aaa;
+}
+
+/* Optional: LogoTitle colors in dark mode */
+body.dark .logo-title .title,
+body.dark .logo-title .subtitle {
+  color: #fff;
+}
 }
