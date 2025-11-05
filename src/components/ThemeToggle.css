@@ -1,0 +1,18 @@
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.2);
+}
+
+.theme-toggle svg {
+  transition: transform 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
+}
