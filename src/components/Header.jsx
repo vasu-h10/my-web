@@ -14,7 +14,12 @@ export default function Header({ onRegistered }) {
     <header className="app-header">
       <div className="header-section left">
         <ProfileIcon onClick={() => setShowForm(s => !s)} />
-        { showForm && <ProfileForm onClose={() => setShowForm(false)} onRegistered={onRegistered} /> }
+        {showForm && (
+          <ProfileForm
+            onClose={() => setShowForm(false)}
+            onRegistered={onRegistered}
+          />
+        )}
       </div>
 
       <div className="header-section center">
@@ -22,7 +27,13 @@ export default function Header({ onRegistered }) {
       </div>
 
       <div className="header-section right">
-        <ThemeToggle dark={dark} onToggle={() => { setDark(d=>!d); document.body.classList.toggle("dark", !dark); }} />
+        <ThemeToggle
+          dark={dark}
+          onToggle={() => {
+            setDark(d => !d);
+            document.body.classList.toggle("dark", !dark);
+          }}
+        />
         <DonationIcon />
       </div>
     </header>
