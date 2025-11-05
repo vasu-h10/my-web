@@ -1,21 +1,32 @@
 .logo-title-container {
-  width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #fafafa;
-  padding: 10px 0;
+  padding: 6px 0;
+  width: 100%;
 }
 
 .logo-title-container svg {
   width: 100%;
   height: auto;
-  max-width: 420px;
+  max-width: 160px; /* smaller size for header fit */
 }
 
 .logo-title-container text {
   font-family: Verdana, sans-serif;
   font-weight: bold;
-  font-size: 32px;
+  font-size: 26px;  /* reduced from 32px for mobile fit */
   fill: red;
   stroke: red;
-  stroke-width: 1;
+  stroke-width: 0.8;
+}
+
+@media (max-width: 480px) {
+  .logo-title-container svg {
+    max-width: 120px; /* mobile view */
+  }
+  .logo-title-container text {
+    font-size: 22px;
+  }
 }
