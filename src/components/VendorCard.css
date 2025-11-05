@@ -1,0 +1,76 @@
+.vendor-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+}
+
+.vendor-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.vendor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.vendor-header .profile {
+  display: flex;
+  align-items: center;
+}
+
+.vendor-header .profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.vendor-header .vendor-id {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.dish-images {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dish-images img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.vendor-details {
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.vendor-details .label {
+  font-weight: 700;
+}
+
+body.dark .vendor-card {
+  background-color: #222;
+  border: 1px solid #333;
+}
+
+body.dark .vendor-details {
+  color: #eee;
+}
+
+body.dark .vendor-header .vendor-id {
+  color: #aaa;
+}
