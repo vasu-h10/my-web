@@ -3,29 +3,29 @@
   justify-content: center;
   align-items: center;
   background: transparent;
-  padding: 2px 0;
-  width: auto;            /* don't stretch full width */
-  flex-shrink: 0;         /* prevent collapsing between icons */
+  padding: 4px 0;
+  width: auto;          /* not full width */
+  flex-shrink: 0;       /* prevent collapse between icons */
 }
 
 .logo-title-container svg {
   width: auto;
   height: auto;
-  max-width: 100px;       /* reduced for header fit */
+  max-width: 110px;     /* smaller size for better header balance */
 }
 
 .logo-title-container text {
   font-family: Verdana, sans-serif;
   font-weight: bold;
-  font-size: 22px;        /* compact title */
+  font-size: 22px;      /* slightly reduced for neat mobile fit */
   fill: red;
   stroke: red;
-  stroke-width: 0.7;
+  stroke-width: 0.8;
 }
 
 @media (max-width: 480px) {
   .logo-title-container svg {
-    max-width: 80px;      /* smaller on mobile */
+    max-width: 90px;    /* smaller on very small screens */
   }
   .logo-title-container text {
     font-size: 18px;
