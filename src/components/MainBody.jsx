@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
+import VendorHeader from "./VendorHeader";
+import VendorDishes from "./VendorDishes";
+import VendorSourceCard from "./VendorSourceCard";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
@@ -11,7 +14,6 @@ export default function MainBody() {
     setVendors(stored.filter(v => v.status === "registered"));
   }, []);
 
-  // Filter vendors based on search term
   const filteredVendors = vendors.filter(
     v =>
       v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -34,22 +36,16 @@ export default function MainBody() {
       <div className="vendor-grid">
         {filteredVendors.map(v => (
           <div key={v.id} className="vendor-card">
-            <div className="vendor-header">
-              <img className="profile" src={v.profile || "default-profile.png"} alt="Profile" />
-              <div className="vendor-name">{v.firstName} {v.lastName}</div>
-              <div className="vendor-details">ID: {v.vendorID} · {v.location}</div>
-            </div>
+            {/* Vendor header */}
+            <VendorHeader vendor={v} />
 
-            <div className="dish-row">
-              {v.dishes?.map(d => (
-                <div key={d.id}>
-                  <img src={d.image} alt={d.name} />
-                  <div style={{ fontSize: 10, textAlign: "center" }}>{d.name}</div>
-                </div>
-              ))}
-            </div>
+            {/* Vendor dishes */}
+            {v.dishes && v.dishes.length > 0 && (
+              <VendorDishes dishes={v.dishes} />
+            )}
 
-            {/* Vendor source card / form wrapper can go here */}
+            {/* Vendor source card / form wrapper */}
+            <VendorSourceCard vendor={v} />
           </div>
         ))}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
