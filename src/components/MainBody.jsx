@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
+import VendorCard from "./VendorCard";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
@@ -34,10 +35,7 @@ export default function MainBody() {
 
       <div className="vendor-grid">
         {filteredVendors.map(v => (
-          <div key={v.id} className="vendor-card">
-            <div className="vendor-name">{v.firstName} {v.lastName}</div>
-            <div className="vendor-details">{v.email} · {v.location}</div>
-          </div>
+          <VendorCard key={v.id} vendor={v} />
         ))}
         {filteredVendors.length === 0 && (
           <p>No vendors match your search.</p>
