@@ -1,12 +1,30 @@
 import React from "react";
+import "./DonationIcon.css";
 
 export default function DonationIcon() {
   return (
-    <div style={{width:36,height:36,display:"flex",alignItems:"center",justifyContent:"center"}}>
-      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{animation:"pulse 1.6s infinite"}}>
-        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l8.6-8.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+    <div className="zoom-container">
+      {/* Hand */}
+      <svg
+        className="hand-svg"
+        viewBox="0 0 202 202"
+        width="80"
+        height="80"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M 70 95 L 70 90 80 90 80 115 70 115 70 95" fill="skyblue" stroke="#888" strokeWidth="2"/>
+        <path d="M 80 92.5 L 92 86 95 86 110 92 115 93 116 94 118 98 114 101 97 97" fill="none" stroke="#888" strokeWidth="2"/>
+        <path d="M 80 112 L 104 117 120 110 135 95 135 89 130 89 117 98" fill="none" stroke="#888" strokeWidth="2"/>
+        <path d="M 76 110 L 73 110" fill="none" stroke="#888" strokeWidth="2"/>
       </svg>
-      <style>{'@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}'}</style>
+
+      {/* Coin */}
+      <div className="coin-container">
+        <div className="coin">
+          <div className="coin-face front">$</div>
+          <div className="coin-face back">₹</div>
+        </div>
+      </div>
     </div>
   );
 }
