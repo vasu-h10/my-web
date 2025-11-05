@@ -8,70 +8,13 @@
   gap: 12px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .vendor-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* VendorHeader */
-.vendor-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.vendor-profile-pic {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.vendor-id div {
-  font-size: 14px;
-}
-
-/* VendorDishes */
-.vendor-dishes {
-  display: flex;
-  overflow-x: auto;
-  gap: 12px;
-}
-.dish-card {
-  min-width: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.dish-card img {
-  width: 100px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 6px;
-}
-.dish-card input {
-  padding: 4px 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 12px;
-}
-
-/* VendorSourceCard */
-.vendor-source-card {
-  padding: 8px;
-  border-top: 1px solid #ddd;
-  font-size: 13px;
-}
-
-/* Dark Mode */
+/* Dark mode */
 body.dark .vendor-card {
   background-color: #1a1a1a;
   border: 1px solid #333;
-}
-body.dark .vendor-source-card {
-  border-top: 1px solid #444;
-}
-body.dark .dish-card input {
-  background-color: #222;
-  color: #eee;
-  border: 1px solid #444;
 }
