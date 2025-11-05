@@ -16,3 +16,8 @@
 .theme-toggle svg {
   transition: transform 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
 }
+
+/* Optional: change sun/moon color on dark mode */
+body.dark .theme-toggle svg {
+  stroke: yellow; /* or white for moon */
+}
