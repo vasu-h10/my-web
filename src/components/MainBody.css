@@ -1,0 +1,40 @@
+.main {
+  flex: 1;
+  padding: 16px;
+  background-color: #fff;
+  color: #111;
+}
+
+.vendor-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.vendor-card {
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.vendor-name {
+  font-weight: 700;
+}
+
+.vendor-details {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Dark mode */
+body.dark .main {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.dark .vendor-card {
+  border: 1px solid #333;
+}
+
+body.dark .vendor-details {
+  color: #aaa;
+}
