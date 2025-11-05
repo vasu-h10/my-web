@@ -1,0 +1,27 @@
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0066ff;
+  box-shadow: 0 0 5px rgba(0, 102, 255, 0.4);
+}
+
+/* Dark mode support */
+body.dark .search-input {
+  background-color: #222;
+  border: 1px solid #555;
+  color: #eee;
+}
+
+body.dark .search-input:focus {
+  border-color: #66aaff;
+  box-shadow: 0 0 5px rgba(102, 170, 255, 0.4);
+}
