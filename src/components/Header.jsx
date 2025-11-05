@@ -12,8 +12,9 @@ export default function Header({ onRegistered }) {
 
   return (
     <header className="app-header">
+      {/* Left section */}
       <div className="header-section left">
-        <ProfileIcon onClick={() => setShowForm(s => !s)} />
+        <ProfileIcon onClick={() => setShowForm((s) => !s)} />
         {showForm && (
           <ProfileForm
             onClose={() => setShowForm(false)}
@@ -22,15 +23,19 @@ export default function Header({ onRegistered }) {
         )}
       </div>
 
+      {/* Center section — wrapped for logo alignment */}
       <div className="header-section center">
-        <LogoTitle />
+        <div className="logo-wrapper">
+          <LogoTitle />
+        </div>
       </div>
 
+      {/* Right section */}
       <div className="header-section right">
         <ThemeToggle
           dark={dark}
           onToggle={() => {
-            setDark(d => !d);
+            setDark((d) => !d);
             document.body.classList.toggle("dark", !dark);
           }}
         />
