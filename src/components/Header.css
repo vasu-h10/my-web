@@ -23,7 +23,8 @@
 }
 
 .header-section.center {
-  justify-content: center;
+  justify-content: flex-start; /* changed from center to flex-start for slight left shift */
+  padding-left: 8px;           /* small nudge for perfect sitting */
 }
 
 .header-section.right {
@@ -35,6 +36,7 @@
   max-width: 140px;
   margin: 0 auto;
   flex-shrink: 1;
+  margin-left: -8px; /* shift logo slightly left */
 }
 
 /* Logo title styling (fallback for older layout) */
@@ -94,9 +96,9 @@
 
   .logo-wrapper {
     max-width: 100px;
+    margin-left: -4px; /* slightly reduce left shift on mobile */
   }
-/* --- existing styles --- */
-/* your current Header.css stays as-is above this line */
+}
 
 /* --- Dark mode overrides --- */
 body.dark {
@@ -127,5 +129,4 @@ body.dark .notice {
 body.dark .logo-title .title,
 body.dark .logo-title .subtitle {
   color: #fff;
-}
 }
