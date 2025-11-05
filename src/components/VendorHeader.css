@@ -1,0 +1,31 @@
+.vendor-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vendor-profile-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.vendor-id {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+body.dark .vendor-header {
+  gap: 12px;
+}
+
+body.dark .vendor-profile-pic {
+  border: 2px solid #555;
+}
+
+body.dark .vendor-id {
+  color: #eee;
+}
