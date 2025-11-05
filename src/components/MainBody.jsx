@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
+import VendorHeader from "./VendorHeader";
 import VendorDishes from "./VendorDishes";
 import VendorSourceCard from "./VendorSourceCard";
-import VendorHeader from "./VendorHeader";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
@@ -14,6 +14,7 @@ export default function MainBody() {
     setVendors(stored.filter(v => v.status === "registered"));
   }, []);
 
+  // Filter vendors based on search term
   const filteredVendors = vendors.filter(
     v =>
       v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -31,6 +32,7 @@ export default function MainBody() {
 
   return (
     <main className="main">
+      {/* Search box */}
       <Search value={searchTerm} onChange={setSearchTerm} />
 
       <div className="vendor-grid">
@@ -39,10 +41,10 @@ export default function MainBody() {
             {/* Vendor Header */}
             <VendorHeader vendor={v} />
 
-            {/* Dish images scroll row */}
+            {/* Dish images scroll */}
             <VendorDishes dishes={v.dishes || []} />
 
-            {/* Vendor Source Card */}
+            {/* Vendor source card */}
             <VendorSourceCard vendor={v} />
           </div>
         ))}
