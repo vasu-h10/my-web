@@ -1,23 +1,60 @@
+/* Main container */
 .main {
   flex: 1;
   padding: 16px;
   background-color: #fff;
   color: #111;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
+/* Search box styling */
+.search-container {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 12px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-container input:focus {
+  border-color: #0066ff;
+  box-shadow: 0 0 4px rgba(0, 102, 255, 0.5);
+}
+
+/* Vendor grid */
 .vendor-grid {
   display: grid;
   gap: 12px;
 }
 
+/* Vendor card */
 .vendor-card {
   padding: 12px;
   border: 1px solid #eee;
   border-radius: 8px;
+  background-color: #fafafa;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.vendor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Vendor details */
 .vendor-name {
   font-weight: 700;
+  margin-bottom: 4px;
 }
 
 .vendor-details {
@@ -33,8 +70,20 @@ body.dark .main {
 
 body.dark .vendor-card {
   border: 1px solid #333;
+  background-color: #1a1a1a;
 }
 
 body.dark .vendor-details {
   color: #aaa;
+}
+
+body.dark .search-container input {
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  color: #eee;
+}
+
+body.dark .search-container input:focus {
+  border-color: #3399ff;
+  box-shadow: 0 0 4px rgba(51, 153, 255, 0.5);
 }
