@@ -1,0 +1,12 @@
+# Ignore system, backup, and external folders
+../my-vindhu-backup/
+../my-vindhu-clean/
+../my-vindhu-react/
+../my-vindhu/
+../my-web-fresh/
+../my-web-react/
+../my-web-vanilla-backup.html
+../my-web/
+../myvindhu-app/
+../myvindhu-react/
+../profileform_temp/
