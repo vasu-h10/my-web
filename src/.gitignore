@@ -1,12 +1,24 @@
 # Ignore system, backup, and external folders
-../my-vindhu-backup/
-../my-vindhu-clean/
-../my-vindhu-react/
-../my-vindhu/
-../my-web-fresh/
-../my-web-react/
-../my-web-vanilla-backup.html
-../my-web/
-../myvindhu-app/
-../myvindhu-react/
-../profileform_temp/
+my-vindhu-backup/
+my-vindhu-clean/
+my-vindhu-react/
+my-vindhu/
+my-web-fresh/
+my-web-react/
+my-web-vanilla-backup.html
+my-web/
+myvindhu-app/
+myvindhu-react/
+profileform_temp/
+
+# Ignore shell, config, and credential files
+.bash_history
+.config/
+.git-credentials
+.gitconfig
+.lesshst
+.npm/
+
+# Node / Vite / React artifacts
+node_modules/
+dist/
