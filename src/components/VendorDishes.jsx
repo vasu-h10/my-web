@@ -10,6 +10,9 @@ export default function VendorDishes({ dishes }) {
           <input type="text" placeholder="Dish name" defaultValue={dish.name} />
         </div>
       ))}
+      <div className="dish-card add-dish">
+        <span>+</span>
+      </div>
     </div>
   );
 }

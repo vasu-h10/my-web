@@ -1,32 +1,42 @@
 .vendor-dishes {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   overflow-x: auto;
-  padding: 4px 0;
+  padding: 8px 0;
 }
 
 .dish-card {
+  flex: 0 0 auto;
+  width: 100px;
+  height: 100px;
+  background: #f5f5f5;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .dish-card img {
   width: 80px;
   height: 80px;
-  border-radius: 6px;
   object-fit: cover;
-  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .dish-card input {
   width: 80px;
   font-size: 12px;
-  text-align: center;
+  margin-top: 4px;
 }
 
-body.dark .dish-card img {
-  border: 1px solid #555;
+.dish-card.add-dish {
+  font-size: 24px;
+  cursor: pointer;
+  color: #0066ff;
+  justify-content: center;
+  align-items: center;
 }
