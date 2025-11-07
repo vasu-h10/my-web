@@ -1,6 +1,3 @@
-import VendorSourceCard from './VendorSourceCard';
-import VendorDishes from './VendorDishes';
-import VendorHeader from './VendorHeader';
 import React from "react";
 import "./VendorCard.css";
 import VendorHeader from "./VendorHeader";
