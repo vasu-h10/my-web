@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
 import VendorCard from "./VendorCard";
+import { getVendors } from "../utils/VendorStorage";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("vendors") || "[]");
+    const stored = getVendors();
     setVendors(stored.filter(v => v.status === "registered"));
   }, []);
 
