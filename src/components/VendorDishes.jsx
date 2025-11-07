@@ -16,4 +16,3 @@ export default function VendorDishes({ dishes }) {
     </div>
   );
 }
-// Updated scrollable dish previews
