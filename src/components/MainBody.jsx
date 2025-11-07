@@ -1,4 +1,3 @@
-import VendorCard from './VendorCard';
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
