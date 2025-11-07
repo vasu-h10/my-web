@@ -1,26 +1,28 @@
 import React, { useState } from "react";
+import { addProfile } from "../utils/ProfileStorage";
 
 export default function ProfileForm({ onClose, onRegistered }) {
   const [form, setForm] = useState({ firstName:"", lastName:"", email:"", location:"" });
 
-  function handleChange(e){
+  function handleChange(e) {
     const { name, value } = e.target;
     setForm(s => ({ ...s, [name]: value }));
   }
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
-    const vendors = JSON.parse(localStorage.getItem("vendors") || "[]");
-    const newV = { id: Date.now(), ...form, status:"registered" };
-    vendors.push(newV);
-    localStorage.setItem("vendors", JSON.stringify(vendors));
+    addProfile(form);
     if(onRegistered) onRegistered();
     if(onClose) onClose();
     alert("Vendor registered successfully!");
   }
 
   return (
-    <div style={{ position:"absolute", top:60, left:10, background:"#fff", color:"#333", padding:12, borderRadius:10, boxShadow:"0 6px 18px rgba(0,0,0,0.12)", zIndex:40, width:260 }}>
+    <div style={{
+      position:"absolute", top:60, left:10, background:"#fff", color:"#333",
+      padding:12, borderRadius:10, boxShadow:"0 6px 18px rgba(0,0,0,0.12)",
+      zIndex:40, width:260
+    }}>
       <h3 style={{margin:"0 0 8px", color:"#0066ff"}}>Complete profile</h3>
       <form onSubmit={handleSubmit}>
         <input name="firstName" placeholder="First name" value={form.firstName} onChange={handleChange} required style={{width:"100%",padding:8,marginBottom:8}}/>
