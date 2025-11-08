@@ -1,4 +1,4 @@
-// VendorStorage.js
+// src/utils/VendorStorage.js
 export function getVendors() {
   return JSON.parse(localStorage.getItem("vendors") || "[]");
 }
