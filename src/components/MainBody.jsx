@@ -8,9 +8,13 @@ export default function MainBody() {
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
+  const loadVendors = () => {
     const stored = getVendors();
     setVendors(stored.filter(v => v.status === "registered"));
+  };
+
+  useEffect(() => {
+    loadVendors();
   }, []);
 
   const filteredVendors = vendors.filter(
@@ -33,7 +37,11 @@ export default function MainBody() {
       <Search value={searchTerm} onChange={setSearchTerm} />
       <div className="vendor-grid">
         {filteredVendors.map(v => (
-          <VendorCard key={v.id} vendor={v} />
+          <VendorCard 
+            key={v.id} 
+            vendor={v} 
+            onVendorUpdate={loadVendors} // refresh after deletion
+          />
         ))}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
       </div>
