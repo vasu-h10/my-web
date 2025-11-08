@@ -1,31 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import MainBody from "./components/MainBody";
 import ProfileForm from "./components/ProfileForm";
 import Footer from "./components/Footer";
+import { getVendors, saveVendors } from "./utils/VendorStorage";
 import "./App.css";
 
 export default function App() {
   const [showProfileForm, setShowProfileForm] = useState(false);
-  const [vendorVersion, setVendorVersion] = useState(0); // triggers MainBody re-render
+  const [vendors, setVendors] = useState([]);
 
-  const handleVendorsChange = () => {
-    setVendorVersion(prev => prev + 1);
+  // Load vendors from localStorage on mount
+  useEffect(() => {
+    const stored = getVendors();
+    setVendors(stored.filter(v => v.status === "registered"));
+  }, []);
+
+  // Function to refresh vendor list
+  const refreshVendors = () => {
+    const stored = getVendors();
+    setVendors(stored.filter(v => v.status === "registered"));
   };
 
   return (
     <div className="app">
       <Header onProfileClick={() => setShowProfileForm(true)} />
+
       <main className="main-body">
-        <MainBody key={vendorVersion} onVendorsChange={handleVendorsChange} />
+        {vendors.length > 0 ? (
+          <MainBody vendors={vendors} refreshVendors={refreshVendors} />
+        ) : (
+          <p className="no-vendor-text">
+            No registered vendors yet. Please register using the profile icon.
+          </p>
+        )}
       </main>
+
       <Footer />
+
       {showProfileForm && (
         <ProfileForm
           onClose={() => setShowProfileForm(false)}
           onRegistered={() => {
-            handleVendorsChange();
             setShowProfileForm(false);
+            refreshVendors(); // immediately update MainBody
           }}
         />
       )}
