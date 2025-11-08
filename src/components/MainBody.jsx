@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
 import VendorCard from "./VendorCard";
-import { getVendors } from "../utils/VendorStorage";
+import { getProfiles } from "../utils/ProfileStorage";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const loadVendors = () => {
-    const stored = getVendors();
+    const stored = getProfiles();
     setVendors(stored.filter(v => v.status === "registered"));
   };
 
@@ -40,7 +40,7 @@ export default function MainBody() {
           <VendorCard 
             key={v.id} 
             vendor={v} 
-            onVendorUpdate={loadVendors} // refresh after deletion
+            onVendorUpdate={loadVendors} 
           />
         ))}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}

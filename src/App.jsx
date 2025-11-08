@@ -3,30 +3,22 @@ import Header from "./components/Header";
 import MainBody from "./components/MainBody";
 import ProfileForm from "./components/ProfileForm";
 import Footer from "./components/Footer";
-import { getVendors } from "./utils/VendorStorage";
+import { getProfiles } from "./utils/ProfileStorage";
 import "./App.css";
 
 export default function App() {
-  // Tracks whether the ProfileForm modal is visible
   const [showProfileForm, setShowProfileForm] = useState(false);
-  // Tracks whether at least one vendor is registered
-  const [registered, setRegistered] = useState(false);
-  const [vendorVersion, setVendorVersion] = useState(0); // to force re-render after registration
-
-  // ✅ On mount, check if vendors are already stored
-  useEffect(() => {
-    const stored = getVendors();
-    if (stored && stored.some(v => v.status === "registered")) {
-      setRegistered(true);
-    }
-  }, []);
+  const [vendorVersion, setVendorVersion] = useState(0);
+  const hasRegisteredVendors = () => {
+    const stored = getProfiles();
+    return stored.some(v => v.status === "registered");
+  };
+  const [registered, setRegistered] = useState(hasRegisteredVendors());
 
   return (
     <div className="app">
-      {/* Header with profile click handler */}
       <Header onProfileClick={() => setShowProfileForm(true)} />
 
-      {/* Main content area */}
       <main className="main-body">
         {registered ? (
           <MainBody key={vendorVersion} />
@@ -37,16 +29,14 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer always visible */}
       <Footer />
 
-      {/* Profile Form modal */}
       {showProfileForm && (
         <ProfileForm
           onClose={() => setShowProfileForm(false)}
           onRegistered={() => {
             setRegistered(true);
-            setVendorVersion(vendorVersion + 1); // force MainBody re-render
+            setVendorVersion(vendorVersion + 1);
             setShowProfileForm(false);
           }}
         />
