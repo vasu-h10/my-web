@@ -11,19 +11,15 @@ export default function App() {
   const [showProfileForm, setShowProfileForm] = useState(false);
   // Tracks whether at least one vendor is registered
   const [registered, setRegistered] = useState(false);
-  // Tracks vendor changes to force re-render
-  const [vendorVersion, setVendorVersion] = useState(0);
+  const [vendorVersion, setVendorVersion] = useState(0); // to force re-render after registration
 
-  // Refresh registered state whenever vendorVersion changes
+  // ✅ On mount, check if vendors are already stored
   useEffect(() => {
     const stored = getVendors();
-    setRegistered(stored.some(v => v.status === "registered"));
-  }, [vendorVersion]);
-
-  const handleRegistered = () => {
-    setVendorVersion(prev => prev + 1); // Trigger refresh
-    setShowProfileForm(false);
-  };
+    if (stored && stored.some(v => v.status === "registered")) {
+      setRegistered(true);
+    }
+  }, []);
 
   return (
     <div className="app">
@@ -33,7 +29,7 @@ export default function App() {
       {/* Main content area */}
       <main className="main-body">
         {registered ? (
-          <MainBody key={vendorVersion} /> {/* Force re-render */}
+          <MainBody key={vendorVersion} />
         ) : (
           <p className="no-vendor-text">
             No registered vendors yet. Please register using the profile icon.
@@ -48,7 +44,11 @@ export default function App() {
       {showProfileForm && (
         <ProfileForm
           onClose={() => setShowProfileForm(false)}
-          onRegistered={handleRegistered}
+          onRegistered={() => {
+            setRegistered(true);
+            setVendorVersion(vendorVersion + 1); // force MainBody re-render
+            setShowProfileForm(false);
+          }}
         />
       )}
     </div>
