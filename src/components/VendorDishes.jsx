@@ -30,6 +30,7 @@ export default function VendorDishes({ vendor, updateVendor }) {
   };
 
   const handleImageUpload = (idx, file) => {
+    if (!file) return;
     const reader = new FileReader();
     reader.onload = (e) => {
       const newDishes = [...dishes];
