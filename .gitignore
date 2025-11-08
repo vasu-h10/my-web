@@ -1,4 +1,18 @@
+# Ignore everything by default
+/*
+
+# Include essential project files and folders
+!.gitignore
+!src/
+!package.json
+!vite.config.js
+!index.html
+
+# Common Node/Vite environment ignores
 node_modules
 dist
 .env
 .DS_Store
+.vite/
+coverage/
+*.log
