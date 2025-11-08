@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./VendorCard.css";
 import VendorHeader from "./VendorHeader";
 import VendorDishes from "./VendorDishes";
 import VendorSourceCard from "./VendorSourceCard";
 
-export default function VendorCard({ vendor, updateVendor }) {
+export default function VendorCard({ vendor }) {
+  const [currentVendor, setCurrentVendor] = useState(vendor);
+
   return (
     <div className="vendor-card">
-      <VendorHeader vendor={vendor} />
-      {/* Pass updateVendor so VendorDishes can persist changes */}
-      <VendorDishes vendor={vendor} updateVendor={updateVendor} />
-      <VendorSourceCard vendor={vendor} />
+      <VendorHeader vendor={currentVendor} />
+      <VendorDishes 
+        vendor={currentVendor} 
+        updateVendor={setCurrentVendor} 
+      />
+      <VendorSourceCard vendor={currentVendor} />
     </div>
   );
 }
