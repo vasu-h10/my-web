@@ -7,23 +7,24 @@ import "./App.css";
 
 export default function App() {
   const [showProfileForm, setShowProfileForm] = useState(false);
-  const [refreshCount, setRefreshCount] = useState(0); // force MainBody update
+  const [vendorVersion, setVendorVersion] = useState(0); // triggers MainBody re-render
+
+  const handleVendorsChange = () => {
+    setVendorVersion(prev => prev + 1);
+  };
 
   return (
     <div className="app">
       <Header onProfileClick={() => setShowProfileForm(true)} />
-
       <main className="main-body">
-        <MainBody refreshCount={refreshCount} />
+        <MainBody key={vendorVersion} onVendorsChange={handleVendorsChange} />
       </main>
-
       <Footer />
-
       {showProfileForm && (
         <ProfileForm
           onClose={() => setShowProfileForm(false)}
           onRegistered={() => {
-            setRefreshCount(prev => prev + 1); // triggers MainBody refresh
+            handleVendorsChange();
             setShowProfileForm(false);
           }}
         />

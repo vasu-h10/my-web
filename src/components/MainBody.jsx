@@ -4,26 +4,29 @@ import Search from "./Search";
 import VendorCard from "./VendorCard";
 import { getVendors } from "../utils/VendorStorage";
 
-export default function MainBody({ refreshVersion }) {
+export default function MainBody({ onVendorsChange }) {
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const loadVendors = () => {
-    const stored = getVendors();
-    setVendors(stored.filter(v => v.status === "registered"));
+    const stored = getVendors().filter(v => v.status === "registered");
+    setVendors(stored);
   };
 
-  // Reload vendors whenever refreshVersion changes
   useEffect(() => {
     loadVendors();
-  }, [refreshVersion]);
+  }, []);
 
-  const filteredVendors = vendors.filter(
-    v =>
-      v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      v.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      v.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      v.location.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleVendorUpdate = () => {
+    loadVendors();
+    if (onVendorsChange) onVendorsChange();
+  };
+
+  const filteredVendors = vendors.filter(v =>
+    v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    v.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    v.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    v.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (!vendors.length)
@@ -38,10 +41,10 @@ export default function MainBody({ refreshVersion }) {
       <Search value={searchTerm} onChange={setSearchTerm} />
       <div className="vendor-grid">
         {filteredVendors.map(v => (
-          <VendorCard 
-            key={v.id} 
-            vendor={v} 
-            onVendorUpdate={loadVendors} // refresh after deletion
+          <VendorCard
+            key={v.id}
+            vendor={v}
+            onVendorUpdate={handleVendorUpdate}
           />
         ))}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
