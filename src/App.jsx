@@ -11,7 +11,6 @@ export default function App() {
   const [registered, setRegistered] = useState(false);
   const [vendorVersion, setVendorVersion] = useState(0); // force MainBody re-render
 
-  // ✅ On mount, check if vendors are already stored
   useEffect(() => {
     const stored = getVendors();
     if (stored && stored.some(v => v.status === "registered")) {
@@ -21,32 +20,20 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Header with profile click handler */}
       <Header onProfileClick={() => setShowProfileForm(true)} />
 
-      {/* Main content area */}
       <main className="main-body">
-        {registered ? (
-          <MainBody key={vendorVersion} />
-        ) : (
-          <p className="no-vendor-text">
-            No registered vendors yet. Please register using the profile icon.
-          </p>
-        )}
+        <MainBody key={vendorVersion} refreshVersion={vendorVersion} />
       </main>
 
-      {/* Footer always visible */}
       <Footer />
 
-      {/* Profile Form modal */}
       {showProfileForm && (
         <ProfileForm
           onClose={() => setShowProfileForm(false)}
           onRegistered={() => {
-            // Reload vendors and update registered status immediately
-            const stored = getVendors();
-            setRegistered(stored.some(v => v.status === "registered"));
-            setVendorVersion(vendorVersion + 1); // force MainBody re-render
+            setRegistered(true);
+            setVendorVersion(vendorVersion + 1); // trigger refresh in MainBody
             setShowProfileForm(false);
           }}
         />

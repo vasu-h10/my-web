@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
 import VendorCard from "./VendorCard";
-import { getProfiles } from "../utils/ProfileStorage";
+import { getVendors } from "../utils/VendorStorage";
 
-export default function MainBody() {
+export default function MainBody({ refreshVersion }) {
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const loadVendors = () => {
-    const stored = getProfiles();
+    const stored = getVendors();
     setVendors(stored.filter(v => v.status === "registered"));
   };
 
+  // Reload vendors whenever refreshVersion changes
   useEffect(() => {
     loadVendors();
-  }, []);
+  }, [refreshVersion]);
 
   const filteredVendors = vendors.filter(
     v =>
@@ -40,7 +41,7 @@ export default function MainBody() {
           <VendorCard 
             key={v.id} 
             vendor={v} 
-            onVendorUpdate={loadVendors} 
+            onVendorUpdate={loadVendors} // refresh after deletion
           />
         ))}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
