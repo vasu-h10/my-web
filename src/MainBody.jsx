@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
 import VendorCard from "./VendorCard";
-import { getVendors } from "../utils/VendorStorage";
 
-export default function MainBody({ refreshCount }) {
-  const [vendors, setVendors] = useState([]);
+export default function MainBody({ vendors, refreshVendors }) {
   const [searchTerm, setSearchTerm] = useState("");
-
-  const loadVendors = () => {
-    const stored = getVendors();
-    setVendors(stored.filter(v => v.status === "registered"));
-  };
-
-  // Reload vendors whenever refreshCount changes
-  useEffect(() => {
-    loadVendors();
-  }, [refreshCount]);
 
   const filteredVendors = vendors.filter(
     v =>
@@ -26,20 +14,23 @@ export default function MainBody({ refreshCount }) {
       v.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (!vendors.length) {
+  if (!vendors.length)
     return (
       <div className="main">
         <p>No registered vendors yet. Please register from the profile icon.</p>
       </div>
     );
-  }
 
   return (
     <main className="main">
       <Search value={searchTerm} onChange={setSearchTerm} />
       <div className="vendor-grid">
         {filteredVendors.map(v => (
-          <VendorCard key={v.id} vendor={v} onVendorUpdate={loadVendors} />
+          <VendorCard
+            key={v.id}
+            vendor={v}
+            onVendorUpdate={refreshVendors} // pass updater to each card
+          />
         ))}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
       </div>
