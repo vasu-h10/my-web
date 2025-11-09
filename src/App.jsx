@@ -14,6 +14,8 @@ export default function App() {
 
   // Load vendors from localStorage on mount
   useEffect(() => {
+console.log("🟡 Listening for vendor updates...");
+console.log("🟢 Received vendor update:", data);
   socket.on("vendors", data => { setVendors(data.filter(v => v.status === "registered")); });
     const stored = getVendors();
     setVendors(stored.filter(v => v.status === "registered"));
