@@ -1,5 +1,3 @@
-import { io } from "socket.io-client";
-const socket = io("http://localhost:4000");
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
@@ -11,12 +9,13 @@ export default function MainBody({ onVendorsChange }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const loadVendors = () => {
-    const stored = getVendors().filter(v => v.status === "registered");
+    const stored = getVendors()
+      .filter(v => v.status === "registered")
+      .sort((a, b) => b.id - a.id); // newest first
     setVendors(stored);
   };
 
   useEffect(() => {
-  socket.on("vendors", data => { setVendors(data.filter(v => v.status === "registered")); });
     loadVendors();
   }, []);
 
