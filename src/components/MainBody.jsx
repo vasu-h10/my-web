@@ -1,3 +1,5 @@
+import { io } from "socket.io-client";
+const socket = io("http://localhost:4000");
 import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
@@ -14,6 +16,7 @@ export default function MainBody({ onVendorsChange }) {
   };
 
   useEffect(() => {
+  socket.on("vendors", data => { setVendors(data.filter(v => v.status === "registered")); });
     loadVendors();
   }, []);
 
