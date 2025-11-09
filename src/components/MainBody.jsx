@@ -6,11 +6,12 @@ import VendorCard from "./VendorCard";
 export default function MainBody({ vendors, refreshVendors }) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredVendors = vendors.filter(v =>
-    v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.location.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredVendors = vendors.filter(
+    v =>
+      v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      v.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      v.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      v.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (!vendors.length)
@@ -25,7 +26,11 @@ export default function MainBody({ vendors, refreshVendors }) {
       <Search value={searchTerm} onChange={setSearchTerm} />
       <div className="vendor-grid">
         {filteredVendors.map(v => (
-          <VendorCard key={v.id} vendor={v} onVendorUpdate={refreshVendors} />
+          <VendorCard
+            key={v.id}
+            vendor={v}
+            onVendorUpdate={refreshVendors}
+          />
         ))}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
       </div>
