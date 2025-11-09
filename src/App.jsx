@@ -1,3 +1,5 @@
+import { io } from "socket.io-client";
+const socket = io("http://localhost:4000");
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import MainBody from "./components/MainBody";
@@ -12,6 +14,7 @@ export default function App() {
 
   // Load vendors from localStorage on mount
   useEffect(() => {
+  socket.on("vendors", data => { setVendors(data.filter(v => v.status === "registered")); });
     const stored = getVendors();
     setVendors(stored.filter(v => v.status === "registered"));
   }, []);
