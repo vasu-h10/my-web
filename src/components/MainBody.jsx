@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
 import VendorCard from "./VendorCard";
+import { getVendors } from "../utils/VendorStorage";
 
-export default function MainBody({ vendors, refreshVendors }) {
+export default function MainBody({ onVendorsChange }) {
+  const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const loadVendors = () => {
+    const stored = getVendors().filter(v => v.status === "registered");
+    setVendors(stored);
+  };
+
+  useEffect(() => {
+    loadVendors();
+  }, []);
+
+  const handleVendorUpdate = () => {
+    loadVendors();
+    if (onVendorsChange) onVendorsChange();
+  };
 
   const filteredVendors = vendors.filter(v =>
     v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -28,7 +44,7 @@ export default function MainBody({ vendors, refreshVendors }) {
           <VendorCard
             key={v.id}
             vendor={v}
-            onVendorUpdate={refreshVendors}
+            onVendorUpdate={handleVendorUpdate}
           />
         ))}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}

@@ -1,16 +1,8 @@
 import { getVendors, saveVendors } from "./VendorStorage";
 
-export function addProfile(profile) {
+export const addProfile = (profile) => {
   const vendors = getVendors();
-
-  const newVendor = {
-    ...profile,
-    id: Date.now(),
-    status: "registered",
-  };
-
-  vendors.push(newVendor);
+  const newProfile = { ...profile, id: Date.now(), status: "registered" };
+  vendors.push(newProfile);
   saveVendors(vendors);
-
-  return newVendor; // so App can instantly preview it
-}
+};

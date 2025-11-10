@@ -17,10 +17,9 @@ export default function ProfileForm({ onClose, onRegistered }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newVendor = addProfile(form);          // save and get new vendor
-    if (onRegistered) onRegistered(newVendor);   // notify parent for instant preview
+    addProfile(form);
+    if (onRegistered) onRegistered();
     alert("Vendor registered successfully!");
-    setForm({ firstName: "", lastName: "", email: "", location: "" });
   }
 
   return (
@@ -82,7 +81,6 @@ export default function ProfileForm({ onClose, onRegistered }) {
           Register
         </button>
       </form>
-
       <button
         onClick={onClose}
         style={{
