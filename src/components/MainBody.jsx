@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./MainBody.css";
 import Search from "./Search";
 import VendorCard from "./VendorCard";
-import { getVendors } from "../utils/VendorStorage";
 
-export default function MainBody({ onVendorsChange }) {
-  const [vendors, setVendors] = useState([]);
+export default function MainBody({ vendors, refreshVendors }) {
   const [searchTerm, setSearchTerm] = useState("");
-
-  const loadVendors = () => {
-    const stored = getVendors().filter(v => v.status === "registered");
-    setVendors(stored);
-  };
-
-  useEffect(() => {
-    loadVendors();
-  }, []);
-
-  const handleVendorUpdate = () => {
-    loadVendors();
-    if (onVendorsChange) onVendorsChange();
-  };
 
   const filteredVendors = vendors.filter(v =>
     v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -30,23 +14,13 @@ export default function MainBody({ onVendorsChange }) {
   );
 
   if (!vendors.length)
-    return (
-      <div className="main">
-        <p>No registered vendors yet. Please register from the profile icon.</p>
-      </div>
-    );
+    return <div className="main"><p>No registered vendors yet. Please register from the profile icon.</p></div>;
 
   return (
     <main className="main">
       <Search value={searchTerm} onChange={setSearchTerm} />
       <div className="vendor-grid">
-        {filteredVendors.map(v => (
-          <VendorCard
-            key={v.id}
-            vendor={v}
-            onVendorUpdate={handleVendorUpdate}
-          />
-        ))}
+        {filteredVendors.map(v => <VendorCard key={v.id} vendor={v} onVendorUpdate={refreshVendors} />)}
         {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
       </div>
     </main>

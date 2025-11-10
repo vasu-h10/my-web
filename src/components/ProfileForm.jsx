@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { addProfile } from "../utils/ProfileStorage";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
 import "./ProfileForm.css";
 
 export default function ProfileForm({ onClose, onRegistered }) {
@@ -10,17 +11,17 @@ export default function ProfileForm({ onClose, onRegistered }) {
     location: "",
   });
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-  }
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addProfile(form);
+    await addDoc(collection(db, "vendors"), { ...form, status: "registered" });
     if (onRegistered) onRegistered();
     alert("Vendor registered successfully!");
-  }
+  };
 
   return (
     <div
@@ -41,58 +42,16 @@ export default function ProfileForm({ onClose, onRegistered }) {
         Create Vendor Profile
       </h3>
       <form onSubmit={handleSubmit}>
-        <input
-          name="firstName"
-          placeholder="First name"
-          value={form.firstName}
-          onChange={handleChange}
-        />
-        <input
-          name="lastName"
-          placeholder="Last name"
-          value={form.lastName}
-          onChange={handleChange}
-        />
-        <input
-          name="email"
-          placeholder="Email"
-          type="email"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <input
-          name="location"
-          placeholder="City"
-          value={form.location}
-          onChange={handleChange}
-        />
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "8px 0",
-            background: "#0066ff",
-            color: "white",
-            border: "none",
-            borderRadius: 6,
-            cursor: "pointer",
-          }}
-        >
+        <input name="firstName" placeholder="First name" value={form.firstName} onChange={handleChange} />
+        <input name="lastName" placeholder="Last name" value={form.lastName} onChange={handleChange} />
+        <input name="email" placeholder="Email" type="email" value={form.email} onChange={handleChange} />
+        <input name="location" placeholder="City" value={form.location} onChange={handleChange} />
+        <button type="submit" style={{ width: "100%", padding: "8px 0", background: "#0066ff", color: "white", border: "none", borderRadius: 6, cursor: "pointer" }}>
           Register
         </button>
       </form>
-      <button
-        onClick={onClose}
-        style={{
-          marginTop: 8,
-          background: "#eee",
-          border: "none",
-          padding: "6px 0",
-          width: "100%",
-          borderRadius: 6,
-          cursor: "pointer",
-        }}
-      >
+
+      <button onClick={onClose} style={{ marginTop: 8, background: "#eee", border: "none", padding: "6px 0", width: "100%", borderRadius: 6, cursor: "pointer" }}>
         Close
       </button>
     </div>
