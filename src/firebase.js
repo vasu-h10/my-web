@@ -1,18 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
-// 🔑 Replace with your actual Firebase project credentials
 const firebaseConfig = {
-  apiKey: "YOUR_REAL_API_KEY",
-  authDomain: "YOUR_REAL_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_REAL_PROJECT_ID",
-  storageBucket: "YOUR_REAL_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_REAL_SENDER_ID",
-  appId: "YOUR_REAL_APP_ID"
+  apiKey: "AIzaSyC4M4meh_1bHJXiWXg3_Ggg7WDfCI7yFtE",
+  authDomain: "dotted-lexicon-452810-t0.firebaseapp.com",
+  projectId: "dotted-lexicon-452810-t0",
+  storageBucket: "dotted-lexicon-452810-t0.firebasestorage.app",
+  messagingSenderId: "636374653172",
+  appId: "1:636374653172:web:7807321a08b48de080a6a1",
+  measurementId: "G-X8YEW83Z5P"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Firestore instance
 export const db = getFirestore(app);
+export const auth = getAuth(app);

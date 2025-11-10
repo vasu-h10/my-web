@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { db } from "../firebase";
+import { db, auth } from "./firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import "./ProfileForm.css";
 
@@ -8,33 +9,36 @@ export default function ProfileForm({ onClose, onRegistered }) {
     firstName: "",
     lastName: "",
     email: "",
+    password: "",
     location: "",
   });
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-  };
+  }
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-
     try {
-      // Add vendor to Firebase "vendors" collection
+      // Create Firebase Auth user
+      await createUserWithEmailAndPassword(auth, form.email, form.password);
+
+      // Save vendor info to Firestore
       await addDoc(collection(db, "vendors"), {
-        ...form,
-        status: "registered",
-        dishes: [],
-        createdAt: new Date(),
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        location: form.location,
       });
 
-      if (onRegistered) onRegistered(); // Refresh MainBody immediately
       alert("Vendor registered successfully!");
-    } catch (err) {
-      console.error("Error adding vendor:", err);
-      alert("Failed to register vendor. Please try again.");
+      if (onRegistered) onRegistered();
+    } catch (error) {
+      console.error("Firebase error:", error);
+      alert(error.message);
     }
-  };
+  }
 
   return (
     <div
@@ -55,31 +59,11 @@ export default function ProfileForm({ onClose, onRegistered }) {
         Create Vendor Profile
       </h3>
       <form onSubmit={handleSubmit}>
-        <input
-          name="firstName"
-          placeholder="First name"
-          value={form.firstName}
-          onChange={handleChange}
-        />
-        <input
-          name="lastName"
-          placeholder="Last name"
-          value={form.lastName}
-          onChange={handleChange}
-        />
-        <input
-          name="email"
-          placeholder="Email"
-          type="email"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <input
-          name="location"
-          placeholder="City"
-          value={form.location}
-          onChange={handleChange}
-        />
+        <input name="firstName" placeholder="First name" onChange={handleChange} required />
+        <input name="lastName" placeholder="Last name" onChange={handleChange} required />
+        <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
+        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
+        <input name="location" placeholder="City" onChange={handleChange} required />
         <button
           type="submit"
           style={{
