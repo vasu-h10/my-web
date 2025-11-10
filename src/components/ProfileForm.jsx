@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { db } from "../firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import "./ProfileForm.css";
 
-export default function ProfileForm({ onClose, onRegistered }) {
+export default function ProfileForm({ onClose }) {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -9,36 +11,44 @@ export default function ProfileForm({ onClose, onRegistered }) {
     location: "",
   });
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-  }
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Call parent callback for registration
-    if (onRegistered) onRegistered(); 
-    alert("Vendor registered successfully!");
-  }
+
+    try {
+      await addDoc(collection(db, "vendors"), {
+        ...form,
+        status: "registered",
+        createdAt: serverTimestamp(),
+      });
+      alert("Vendor registered successfully!");
+      onClose();
+    } catch (error) {
+      console.error("Error adding vendor: ", error);
+      alert("Failed to register vendor.");
+    }
+  };
 
   return (
     <div
       className="profile-form"
       style={{
-        position: "fixed",
-        top: "60px",
-        left: "50%",
-        transform: "translateX(-50%)",
+        position: "absolute",
+        top: 60,
+        left: 10,
         background: "#fff",
-        padding: 20,
+        padding: 12,
         borderRadius: 10,
         boxShadow: "0 6px 18px rgba(0,0,0,0.2)",
         zIndex: 40,
-        width: "90%",
-        maxWidth: 400,
+        width: 260,
       }}
     >
-      <h3 style={{ margin: "0 0 12px", color: "#0066ff" }}>
+      <h3 style={{ margin: "0 0 8px", color: "#0066ff" }}>
         Create Vendor Profile
       </h3>
       <form onSubmit={handleSubmit}>
