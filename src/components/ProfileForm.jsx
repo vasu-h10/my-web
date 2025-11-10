@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { db, auth } from "../firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addProfile } from "../utils/ProfileStorage";
 import "./ProfileForm.css";
 
 export default function ProfileForm({ onClose, onRegistered }) {
@@ -10,50 +8,95 @@ export default function ProfileForm({ onClose, onRegistered }) {
     lastName: "",
     email: "",
     location: "",
-    password: "",
   });
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-  };
+  }
 
-  const handleSubmit = async (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth, form.email, form.password || "defaultPassword123"
-      );
-      const uid = userCredential.user.uid;
-      await addDoc(collection(db, "vendors"), {
-        uid,
-        firstName: form.firstName,
-        lastName: form.lastName,
-        email: form.email,
-        location: form.location,
-        status: "registered",
-        createdAt: serverTimestamp(),
-      });
-      if(onRegistered) onRegistered();
-      alert("Vendor registered successfully!");
-    } catch(error) {
-      console.error("Error adding vendor:", error);
-      alert(error.message);
-    }
-  };
+    const newVendor = addProfile(form);          // save and get new vendor
+    if (onRegistered) onRegistered(newVendor);   // notify parent for instant preview
+    alert("Vendor registered successfully!");
+    setForm({ firstName: "", lastName: "", email: "", location: "" });
+  }
 
   return (
-    <div className="profile-form">
-      <h3>Create Vendor Profile</h3>
+    <div
+      className="profile-form"
+      style={{
+        position: "absolute",
+        top: 60,
+        left: 10,
+        background: "#fff",
+        padding: 12,
+        borderRadius: 10,
+        boxShadow: "0 6px 18px rgba(0,0,0,0.2)",
+        zIndex: 40,
+        width: 260,
+      }}
+    >
+      <h3 style={{ margin: "0 0 8px", color: "#0066ff" }}>
+        Create Vendor Profile
+      </h3>
       <form onSubmit={handleSubmit}>
-        <input name="firstName" placeholder="First name" value={form.firstName} onChange={handleChange} />
-        <input name="lastName" placeholder="Last name" value={form.lastName} onChange={handleChange} />
-        <input name="email" placeholder="Email" type="email" value={form.email} onChange={handleChange} />
-        <input name="password" placeholder="Password" type="password" value={form.password} onChange={handleChange} />
-        <input name="location" placeholder="City" value={form.location} onChange={handleChange} />
-        <button type="submit">Register</button>
+        <input
+          name="firstName"
+          placeholder="First name"
+          value={form.firstName}
+          onChange={handleChange}
+        />
+        <input
+          name="lastName"
+          placeholder="Last name"
+          value={form.lastName}
+          onChange={handleChange}
+        />
+        <input
+          name="email"
+          placeholder="Email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+        />
+        <input
+          name="location"
+          placeholder="City"
+          value={form.location}
+          onChange={handleChange}
+        />
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "8px 0",
+            background: "#0066ff",
+            color: "white",
+            border: "none",
+            borderRadius: 6,
+            cursor: "pointer",
+          }}
+        >
+          Register
+        </button>
       </form>
-      <button onClick={onClose}>Close</button>
+
+      <button
+        onClick={onClose}
+        style={{
+          marginTop: 8,
+          background: "#eee",
+          border: "none",
+          padding: "6px 0",
+          width: "100%",
+          borderRadius: 6,
+          cursor: "pointer",
+        }}
+      >
+        Close
+      </button>
     </div>
   );
 }

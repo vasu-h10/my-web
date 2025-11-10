@@ -1,12 +1,16 @@
-// src/utils/ProfileStorage.js
+import { getVendors, saveVendors } from "./VendorStorage";
 
-export const getProfiles = () =>
-  JSON.parse(localStorage.getItem("vendors") || "[]");
+export function addProfile(profile) {
+  const vendors = getVendors();
 
-export const addProfile = (profile) => {
-  const vendors = getProfiles();
-  const newVendor = { id: Date.now(), ...profile, status: "registered" };
+  const newVendor = {
+    ...profile,
+    id: Date.now(),
+    status: "registered",
+  };
+
   vendors.push(newVendor);
-  localStorage.setItem("vendors", JSON.stringify(vendors));
-  return newVendor;
-};
+  saveVendors(vendors);
+
+  return newVendor; // so App can instantly preview it
+}
