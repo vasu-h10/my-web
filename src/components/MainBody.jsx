@@ -1,54 +1,46 @@
-import React, { useEffect, useState } from "react";
-import "./MainBody.css";
-import Search from "./Search";
+import React, { useState, useEffect } from "react";
 import VendorCard from "./VendorCard";
-import { getVendors } from "../utils/VendorStorage";
+import "./MainBody.css";
 
-export default function MainBody({ onVendorsChange }) {
+export default function MainBody() {
   const [vendors, setVendors] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const loadVendors = () => {
-    const stored = getVendors().filter(v => v.status === "registered");
-    setVendors(stored);
-  };
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    loadVendors();
+    const storedVendors = JSON.parse(localStorage.getItem("vendors") || "[]");
+    setVendors(storedVendors);
   }, []);
 
-  const handleVendorUpdate = () => {
-    loadVendors();
-    if (onVendorsChange) onVendorsChange();
-  };
-
-  const filteredVendors = vendors.filter(v =>
-    v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.location.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  if (!vendors.length)
+  const filteredVendors = vendors.filter((v) => {
+    const q = search.toLowerCase();
     return (
-      <div className="main">
-        <p>No registered vendors yet. Please register from the profile icon.</p>
-      </div>
+      v.name?.toLowerCase().includes(q) ||
+      v.location?.toLowerCase().includes(q) ||
+      v.category?.toLowerCase().includes(q)
     );
+  });
 
   return (
-    <main className="main">
-      <Search value={searchTerm} onChange={setSearchTerm} />
-      <div className="vendor-grid">
-        {filteredVendors.map(v => (
-          <VendorCard
-            key={v.id}
-            vendor={v}
-            onVendorUpdate={handleVendorUpdate}
-          />
-        ))}
-        {filteredVendors.length === 0 && <p>No vendors match your search.</p>}
+    <div className="main-body">
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="🔍 Search vendors by name, location, or category..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
-    </main>
+
+      <div className="vendor-list">
+        {filteredVendors.length > 0 ? (
+          filteredVendors.map((vendor, index) => (
+            <VendorCard key={index} vendor={vendor} />
+          ))
+        ) : (
+          <p className="no-results">No vendors found.</p>
+        )}
+      </div>
+    </div>
   );
 }

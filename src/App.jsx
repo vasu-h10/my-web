@@ -1,52 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import MainBody from "./components/MainBody";
-import ProfileForm from "./components/ProfileForm";
-import Footer from "./components/Footer";
-import { getVendors, saveVendors } from "./utils/VendorStorage";
-import "./App.css";
+import Footer from "./Footer"; // ✅ correct path since Footer.jsx is in src/
+import "./App.css"; // ✅ make sure App.css exists in src/
 
 export default function App() {
-  const [showProfileForm, setShowProfileForm] = useState(false);
-  const [vendors, setVendors] = useState([]);
-
-  // Load vendors from localStorage on mount
-  useEffect(() => {
-    const stored = getVendors();
-    setVendors(stored.filter(v => v.status === "registered"));
-  }, []);
-
-  // Function to refresh vendor list
-  const refreshVendors = () => {
-    const stored = getVendors();
-    setVendors(stored.filter(v => v.status === "registered"));
-  };
+  const [registered, setRegistered] = useState(() => {
+    const vendors = JSON.parse(localStorage.getItem("vendors") || "[]");
+    return vendors.some(v => v.status === "registered");
+  });
 
   return (
     <div className="app">
-      <Header onProfileClick={() => setShowProfileForm(true)} />
+      {/* Fixed header stays on top */}
+      <Header onRegistered={() => setRegistered(true)} />
 
-      <main className="main-body">
-        {vendors.length > 0 ? (
-          <MainBody vendors={vendors} refreshVendors={refreshVendors} />
+      {/* Main content sits below header */}
+      <main>
+        {registered ? (
+          <MainBody />
         ) : (
-          <p className="no-vendor-text">
-            No registered vendors yet. Please register using the profile icon.
-          </p>
+          <p className="notice">👤 Please complete profile registration</p>
         )}
       </main>
 
       <Footer />
-
-      {showProfileForm && (
-        <ProfileForm
-          onClose={() => setShowProfileForm(false)}
-          onRegistered={() => {
-            setShowProfileForm(false);
-            refreshVendors(); // immediately update MainBody
-          }}
-        />
-      )}
     </div>
   );
 }

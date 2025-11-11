@@ -6,14 +6,19 @@ export function saveVendors(vendors) {
   localStorage.setItem("vendors", JSON.stringify(vendors));
 }
 
-export function addDishToVendor(vendorId, dish) {
+export function addProfile(profile) {
   const vendors = getVendors();
-  const vendor = vendors.find(v => v.id === vendorId);
-  if (vendor) {
-    vendor.dishes = vendor.dishes || [];
-    vendor.dishes.push(dish);
-    saveVendors(vendors);
-  }
+
+  const newVendor = {
+    ...profile,
+    id: Date.now(),
+    status: "registered",
+  };
+
+  vendors.push(newVendor);
+  saveVendors(vendors);
+
+  return newVendor; // important for instant preview
 }
 
 // 🗑️ Delete a single vendor
