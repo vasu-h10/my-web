@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./VendorDishes.css";
-import { getVendors, saveVendors } from "../utils/VendorStorage";
 
 export default function VendorDishes({ vendor, updateVendor }) {
   const totalBoxes = 10;

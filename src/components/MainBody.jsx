@@ -1,43 +1,44 @@
-import React, { useEffect, useState } from "react";
-import Search from "./Search";
+import React, { useState, useEffect } from "react";
 import VendorCard from "./VendorCard";
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase";
 import "./MainBody.css";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "vendors"), (snapshot) => {
-      const liveVendors = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setVendors(liveVendors);
-    });
-    return () => unsubscribe();
+    const storedVendors = JSON.parse(localStorage.getItem("vendors") || "[]");
+    setVendors(storedVendors);
   }, []);
 
-  const filteredVendors = vendors.filter((v) =>
-    [v.firstName, v.lastName, v.email, v.location]
-      .filter(Boolean)
-      .some((field) =>
-        field.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-  );
+  const filteredVendors = vendors.filter((v) => {
+    const q = search.toLowerCase();
+    return (
+      v.name?.toLowerCase().includes(q) ||
+      v.location?.toLowerCase().includes(q) ||
+      v.category?.toLowerCase().includes(q)
+    );
+  });
 
   return (
     <div className="main-body">
-      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <div className="vendor-grid">
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="🔍 Search vendors by name, location, or category..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      <div className="vendor-list">
         {filteredVendors.length > 0 ? (
-          filteredVendors.map((vendor) => (
-            <VendorCard key={vendor.id} vendor={vendor} />
+          filteredVendors.map((vendor, index) => (
+            <VendorCard key={index} vendor={vendor} />
           ))
         ) : (
-          <p className="no-vendors">No vendors found.</p>
+          <p className="no-results">No vendors found.</p>
         )}
       </div>
     </div>
