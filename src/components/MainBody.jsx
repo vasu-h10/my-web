@@ -1,42 +1,45 @@
-import React, { useState, useEffect } from "react";
-import "./MainBody.css";
+import React, { useEffect, useState } from "react";
 import Search from "./Search";
 import VendorCard from "./VendorCard";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
+import "./MainBody.css";
 
 export default function MainBody() {
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const colRef = collection(db, "vendors");
-
-    const unsubscribe = onSnapshot(colRef, (snapshot) => {
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setVendors(data.filter(v => v.status === "registered"));
+    const unsubscribe = onSnapshot(collection(db, "vendors"), (snapshot) => {
+      const liveVendors = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setVendors(liveVendors);
     });
-
     return () => unsubscribe();
   }, []);
 
-  const filteredVendors = vendors.filter(v =>
-    v.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.location.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredVendors = vendors.filter((v) =>
+    [v.firstName, v.lastName, v.email, v.location]
+      .filter(Boolean)
+      .some((field) =>
+        field.toLowerCase().includes(searchTerm.toLowerCase())
+      )
   );
 
   return (
-    <main className="main">
-      <Search value={searchTerm} onChange={setSearchTerm} />
+    <div className="main-body">
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className="vendor-grid">
         {filteredVendors.length > 0 ? (
-          filteredVendors.map(v => <VendorCard key={v.id} vendor={v} />)
+          filteredVendors.map((vendor) => (
+            <VendorCard key={vendor.id} vendor={vendor} />
+          ))
         ) : (
-          <p>No vendors match your search.</p>
+          <p className="no-vendors">No vendors found.</p>
         )}
       </div>
-    </main>
+    </div>
   );
 }
