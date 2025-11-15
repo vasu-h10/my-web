@@ -44,6 +44,13 @@ export default function LogoTitle({ width = 50 }) {
           stroke="red"
           strokeWidth="1"
         />
+        {/* New path added */}
+        <path
+          d="M 170 95 L 166 90 165 85 162 80 160 75 155 70 150 67 145 65 143 63"
+          fill="none"
+          stroke="red"
+          strokeWidth="1"
+        />
         <text
           x="101"
           y="198"
