@@ -1,5 +1,5 @@
 import React from "react";
-import LogoTitle from "./icons/LogoTitle.svg";
+import LogoTitle from "./icons/LogoTitle";
 import "./Header.css";
 
 export default function Header() {
@@ -7,7 +7,7 @@ export default function Header() {
     <header className="header">
       <div className="header-item">👤</div>
       <div className="header-item logo-item">
-        <img src={LogoTitle} alt="Logo" className="logo-img" />
+        <LogoTitle width={50} />
       </div>
       <div className="header-item">🌓</div>
       <div className="header-item">💝</div>

@@ -1,12 +1,11 @@
 import React from "react";
 
-export default function LogoTitle({ size = 50 }) {
+export default function LogoTitle({ width = 50 }) {
   return (
     <svg
       viewBox="0 0 202 202"
       xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
+      style={{ width: width, height: "auto" }}
     >
       <g id="dish">
         <path

@@ -9,16 +9,28 @@
 ├── public
 │   └── vite.svg
 ├── src
-│   └── components
-│       ├── Footer.jsx
-│       ├── Header.jsx
-│       ├── Logo.jsx
-│       ├── Main.jsx
-│       ├── MainBody.jsx
-│       ├── ProfileForm.css
-│       ├── ProfileForm.jsx
-│       ├── ProfileWrapper.jsx
-│       └── VendorFeed.jsx
-└── vite.config.js
+│   ├── App.jsx
+│   ├── components
+│   │   ├── Footer.jsx
+│   │   ├── Header.css
+│   │   ├── Header.jsx
+│   │   ├── Main.jsx
+│   │   ├── MainBody.jsx
+│   │   ├── ProfileForm.css
+│   │   ├── ProfileForm.jsx
+│   │   ├── ProfileWrapper.jsx
+│   │   ├── VendorFeed.jsx
+│   │   └── icons
+│   │       ├── LogoTitle.jsx
+│   │       └── LogoTitle.svg
+│   ├── hooks
+│   ├── icons
+│   │   ├── LogoIcon.jsx
+│   │   └── index.js
+│   ├── layouts
+│   │   └── Layout.jsx
+│   └── main.jsx
+├── vite.config.js
+└── yarn.lock
 
-4 directories, 18 files
+8 directories, 26 files
