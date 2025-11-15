@@ -40,6 +40,7 @@ export default function LogoTitle({ width = 50 }) {
         <path
           d="M115 67 L 100 66 95 66 90 67 95 70 96 75 101 80 103 85 106 87 106 90 
              109 95 113 89 115 86 120 76 115 75 115 70 110 70 115 67"
+        <path d="M 170 95 L 166 90 165 85 162 80 160 75 155 70 150 67 145 65 143 63" fill="none" stroke="red" strokeWidth="1" />
           fill="red"
           stroke="red"
           strokeWidth="1"
@@ -52,6 +53,7 @@ export default function LogoTitle({ width = 50 }) {
           fontFamily="Verdana, sans-serif"
           fontSize="32"
           fontWeight="bold"
+        <path d="M 170 95 L 166 90 165 85 162 80 160 75 155 70 150 67 145 65 143 63" fill="none" stroke="red" strokeWidth="1" />
           fill="red"
           stroke="red"
           strokeWidth="1"
