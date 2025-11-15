@@ -1,16 +1,16 @@
 import React from "react";
+import LogoTitle from "./icons/LogoTitle.svg";
+import "./Header.css";
 
-export default function Header({ onProfileClick }) {
+export default function Header() {
   return (
-    <header className="header" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 20px", background: "#f5f5f5" }}>
-      <h1>MyVindhu</h1>
-      <button
-        onClick={() => window.dispatchEvent(new CustomEvent("toggle-profile"))}
-        style={{ fontSize: "24px", background: "none", border: "none", cursor: "pointer" }}
-        title="Open Profile"
-      >
-        👤
-      </button>
+    <header className="header">
+      <div className="header-item">👤</div>
+      <div className="header-item logo-box">
+        <img src={LogoTitle} alt="Logo" style={{ width: "120px", height: "auto" }} />
+      </div>
+      <div className="header-item">🌓</div>
+      <div className="header-item">💝</div>
     </header>
   );
 }

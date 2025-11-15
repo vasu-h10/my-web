@@ -1,0 +1,24 @@
+.
+├── .gitignore
+├── README.md
+├── eslint.config.js
+├── index.html
+├── my-web-structure.txt
+├── package-lock.json
+├── package.json
+├── public
+│   └── vite.svg
+├── src
+│   └── components
+│       ├── Footer.jsx
+│       ├── Header.jsx
+│       ├── Logo.jsx
+│       ├── Main.jsx
+│       ├── MainBody.jsx
+│       ├── ProfileForm.css
+│       ├── ProfileForm.jsx
+│       ├── ProfileWrapper.jsx
+│       └── VendorFeed.jsx
+└── vite.config.js
+
+4 directories, 18 files
