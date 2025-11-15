@@ -1,3 +1,4 @@
+import DonateIcon from "./icons/DonateIcon";
 import React from "react";
 import LogoTitle from "./icons/LogoTitle";
 import "./Header.css";
